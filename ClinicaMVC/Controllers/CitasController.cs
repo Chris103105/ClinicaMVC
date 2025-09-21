@@ -44,14 +44,16 @@ namespace ClinicaMVC.Controllers
 
             return View(cita);
         }
-
         // GET: Citas/Create
         public IActionResult Create()
         {
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Especialidad");
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Direccion");
+            // Pasar una lista de pacientes y médicos a la vista
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre");
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre");
             return View();
         }
+
+        // ... otras acciones ...
 
         // POST: Citas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
