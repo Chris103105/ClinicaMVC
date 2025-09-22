@@ -44,20 +44,16 @@ namespace ClinicaMVC.Controllers
 
             return View(cita);
         }
+
         // GET: Citas/Create
         public IActionResult Create()
         {
-            // Pasar una lista de pacientes y médicos a la vista
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre");
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre");
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre");
             return View();
         }
 
-        // ... otras acciones ...
-
         // POST: Citas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FechaCita,Motivo,PacienteId,MedicoId")] Cita cita)
@@ -68,8 +64,8 @@ namespace ClinicaMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Especialidad", cita.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Direccion", cita.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
             return View(cita);
         }
 
@@ -86,14 +82,12 @@ namespace ClinicaMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Especialidad", cita.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Direccion", cita.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
             return View(cita);
         }
 
         // POST: Citas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FechaCita,Motivo,PacienteId,MedicoId")] Cita cita)
@@ -123,8 +117,8 @@ namespace ClinicaMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Especialidad", cita.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Direccion", cita.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
             return View(cita);
         }
 
